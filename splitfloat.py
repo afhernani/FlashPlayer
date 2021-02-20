@@ -92,11 +92,11 @@ class Splitfloat(HoverBehavior, ImageR):
                     else:
                         tarea = False
             except Exception as e:
-                print(str(e.args))
+                print('>> init_image -->', str(e.args))
         self.video.toggle_pause()
         self.interval = posission
-        self.video.player.close_player()
-        self.video = None
+        if self.video:
+            self.video = None
         Clock.schedule_once(partial(self.push_image, self.image))
 
     def callback(self, dt):
