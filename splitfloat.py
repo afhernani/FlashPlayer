@@ -227,17 +227,17 @@ class Splitfloat(HoverBehavior, ImageR):
         if self.interval >= self.duration or self.state=='eof':
             self.video.seek(pts=self.loop_time, relative=False, accurate=False)
             self.interval = self.loop_time
-            sleep(1)
+            sleep(0.5)
         else:
             self.video.seek(pts=self.interval, relative=False, accurate=False)
-            sleep(1.5)
-        while self.animation:    
+            sleep(0.5)
+        while self.animation and self.video:    # while loop video animation
             self.image = None   
             self.state, posission, self.image = self.video.get_frame()
             if self.state == 'eof':
                 self.video.seek(pts=self.loop_time, relative=False, accurate=False)
                 self.interval = self.loop_time
-                sleep(2)
+                sleep(0.2)
             elif posission < self.interval:
                 sleep(0.1)
                 continue
@@ -249,8 +249,9 @@ class Splitfloat(HoverBehavior, ImageR):
             sleep(self.state)
         self.interval = posission + self.loop_time
         print('set interval:', self.interval)
-        self.video.player.close_player()
-        self.video = None
+        # self.video.player.close_player()
+        if self.video:
+            self.video = None
 
     def on_leave(self, *args):
         print("You left through this point", self.border_point, self.source)
