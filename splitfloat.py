@@ -69,7 +69,9 @@ class Splitfloat(HoverBehavior, ImageR):
     def init_image(self, url):
         import time
         if self.video.pause: self.video.toggle_pause()
-        pts = self.loop_time*5
+        pts = self.interval
+        if self.interval >= self.duration:
+            pts = self.loop_time
         # print('pts ini:', url,  pts)
         self.video.seek(pts=pts, relative=True, accurate=False)
         time.sleep(0.4)
@@ -159,6 +161,7 @@ class Splitfloat(HoverBehavior, ImageR):
 
     def on_press(self):
         # self.source = 'atlas://data/images/defaulttheme/checkbox_on'
+        print('on_press')
         pass
 
     def on_release(self):
@@ -189,7 +192,7 @@ class Splitfloat(HoverBehavior, ImageR):
         # (x, y)=self.parent.to_parent(touch.x, touch.y)  
         (x, y)=self.to_widget(touch.x, touch.y)
         # print(x, y)
-        if self.collide_point(x, y):
+        if self.collide_point(touch.x, touch.y):
             print('true')
             return True
         return super(Splitfloat, self).on_touch_move(touch)
@@ -202,10 +205,10 @@ class Splitfloat(HoverBehavior, ImageR):
         '''if not self.video.pause:
             self.video.toggle_pause()'''
         if self.video and self.thr.is_alive:
-            print('on_enter, one')
-            self.animation = True
-        elif self.video is None:
-            print('on enter dos')
+            print('on_enter, animation, self.thr is alive')
+            
+        if self.video is None:
+            print('on enter,  animation')
             self.animation = True
             Clock.schedule_once(self.my_anim)
         
@@ -245,7 +248,7 @@ class Splitfloat(HoverBehavior, ImageR):
             # self.push_image(image=image)
             sleep(self.state)
         self.interval = posission + self.loop_time
-        print(self.interval)
+        print('set interval:', self.interval)
         self.video.player.close_player()
         self.video = None
 
@@ -254,6 +257,7 @@ class Splitfloat(HoverBehavior, ImageR):
         # self.anim_delay= -1
         # if self.thr.isAlive:
         self.animation = False
+        self.thr.join()
         # self.video.toggle_pause()
             
 
