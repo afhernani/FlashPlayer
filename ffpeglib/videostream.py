@@ -139,7 +139,7 @@ class VideoStream:
     # Release the video source when the object is destroyed
     def __del__(self):
         self.player.close_player()
-        # print('__del__')
+        # print('__del__', 'destructor videostream')
 
 
 if __name__ == '__main__':
