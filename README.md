@@ -1,17 +1,35 @@
 # SplitView GUI Kivy
-## landview of archive gif.
-## Autor: Hernani Aleman Ferraz
-## email: afhernani@gmail.com / hotmail.com
+
+* Autor: Hernani Aleman Ferraz
+
+* email: afhernani@gmail.com / hotmail.com
+
+A video file browser
 
 # SplitFloat
-## rite: python splitfloat.py
-## Button Open -> path videos + content hidden thumbails files.
+rite:
+
+`python splitfloat.py`
+
+or
+
+`./splitfloat & ` in Linux upload python3
+
+Button Open -> path videos + content hidden thumbails files.
 
 # ContentSplits
-## it's content of splitfloat elements.
+it's content of splitfloat elements.
 
 # LoadDialog.
-## select directory that content the subdirectory of pictures.
+select directory that content the subdirectory of pictures.
+
 
 # SampleApp.
-## Name of application in execution.
+
+./splitfloat.py &
+
+____
+
+# Ongoing development:
+## Mistakes:
+Occasionally an error occurs in 'core' which is fired unexpectedly. - We are trying to find out why.
