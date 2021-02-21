@@ -63,7 +63,7 @@ class Splitfloat(HoverBehavior, ImageR):
             self.interval = self.loop_time
             self.thr = threading.Thread(target=self.init_image, args=(self.url,), daemon=True)
             self.thr.start()
-            self.video.toggle_pause()        
+            # self.video.toggle_pause()        
             self.tooltip = Tooltip(text=str(timedelta(seconds=self.duration)))
 
     def init_image(self, url):
@@ -107,7 +107,7 @@ class Splitfloat(HoverBehavior, ImageR):
         ''' body of destructor '''
         self.animation = False
         Clock.unschedule(self.my_anim)
-        del self.video
+        if self.video: del self.video
 
     @mainthread
     def push_image(self, image, *args):
@@ -537,7 +537,7 @@ class SampleApp(App):
         try:
             for file in files:
                 self.update_box_imagen(file)
-                sleep(1.5)
+                sleep(0.2)
                 if not self.isloadfiles: break
         except:
             print('exception in start load thread from app')
